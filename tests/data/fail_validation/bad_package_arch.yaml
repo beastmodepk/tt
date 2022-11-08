@@ -1,0 +1,23 @@
+---
+product_name: xmlstarlet
+version: 4.5
+variant: Cluster
+allow_source_only: False
+packages:
+  console-login-helper-messages:
+    arch:
+    - ia64
+    - aarch65
+    #^65 should be 64, it will fail as the schema strictly allows the known architecture names only
+    - s390x
+    - src
+    noarch:
+    - ppc64le
+    - s390x
+  xmlstarlet:
+    arch:
+    - aarch64
+    - ppc64le
+    - s390x
+    - x86_64
+    - src

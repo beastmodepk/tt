@@ -1,0 +1,12 @@
+__pycache__/
+ref_material/
+logs/
+.config
+.tox/
+.pytest_cache/
+.vscode/
+tests/data/output*.yaml
+testing/
+declarative_config.egg-info/
+build/
+venv/

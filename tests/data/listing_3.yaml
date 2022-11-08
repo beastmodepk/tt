@@ -1,0 +1,9 @@
+---
+product_name: konami
+version: 1.0
+variant: 7Server-Konami
+allow_source_only: false
+packages:
+  console-login-helper-messages:
+    noarch:
+    - x86_64

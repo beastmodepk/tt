@@ -1,0 +1,60 @@
+---
+#Schema against which product yaml files will be validated.
+product_name:
+  type: string
+  required: True
+  regex: '[a-zA-Z0-9\.\-]*'
+version:
+  type: float
+  min: 0.1
+  max: 100
+variant:
+  type: string
+  regex: '[a-zA-Z0-9\.\-]*'
+allow_source_only:
+  type: boolean
+  required: True
+packages:
+  type: dict
+  #^package listings
+  required: False
+  keysrules:
+    type: string
+    #^These are the actual package names
+    regex: '[a-z0-9\-]*'
+  valuesrules:
+    type: dict
+    #^dict containing just the arch listings, the optional noarch listings, and
+    #multilib (for when the package arch and product arch are two different arches)
+    schema:
+      arch:
+        type: list
+        required: False
+        nullable: False
+        schema:
+          regex: i386|ia64|aarch64|s390|s390x|ppc|ppc64|ppc64le|x86_64
+      src:
+        type: list
+        required: False
+        nullable: False
+        schema:
+          regex: i386|ia64|aarch64|s390|s390x|ppc|ppc64|ppc64le|x86_64
+      noarch:
+        type: list
+        required: False
+        nullable: False
+        schema:
+          type: string
+          regex: i386|ia64|aarch64|s390|s390x|ppc|ppc64|ppc64le|x86_64
+      multilib:
+        type: list
+        required: False
+        nullable: False
+        schema:
+          type: dict
+          keysrules:
+            type: string
+            regex: i386|ia64|aarch64|s390|s390x|ppc|ppc64|ppc64le|x86_64
+          valuesrules:
+            type: string
+            regex: i386|ia64|aarch64|s390|s390x|ppc|ppc64|ppc64le|x86_64

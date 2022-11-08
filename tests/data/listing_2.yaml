@@ -1,0 +1,25 @@
+---
+product_name: RHEL-7-OSE-3.5
+version: 3.5
+variant: Server-RH7-RHOSE-3.5
+allow_source_only: false
+packages:
+  ansible:
+    arch:
+    - x86_64
+    src:
+    - x86_64
+    noarch:
+    - x86_64
+  cockpit:
+    arch:
+    - x86_64
+    src:
+    - x86_64
+  nodejs-chalk:
+    arch:
+    - x86_64
+    src:
+    - x86_64
+    noarch:
+    - x86_64

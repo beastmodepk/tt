@@ -1,0 +1,9 @@
+---
+product_name: name
+version: 1.0
+variant: variant
+allow_source_only: False
+packages:
+  console-login-helper-messages:
+    multilib:
+      - "this should be a dict"

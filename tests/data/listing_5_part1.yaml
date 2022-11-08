@@ -1,0 +1,29 @@
+---
+product_name: RHEL-4
+version: 6.0
+variant: AS
+allow_source_only: false
+packages:
+  console-login-helper-messages:
+    arch:
+    - ia64
+    - aarch64
+    - s390x
+    src:
+    - ia64
+    - aarch64
+    - s390x
+    noarch:
+    - s390x
+    - ppc64le
+  xmlstarlet:
+    arch:
+    - aarch64
+    - s390x
+    - ppc64le
+    - x86_64
+    src:
+    - aarch64
+    - s390x
+    - ppc64le
+    - x86_64

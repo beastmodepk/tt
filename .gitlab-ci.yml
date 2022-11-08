@@ -1,0 +1,31 @@
+stages:
+  - testing
+
+variables:
+  REQUESTS_CA_BUNDLE: /etc/pki/tls/cert.pem
+  POSTGRES_DB: composedb
+  POSTGRES_USER: compose_rw
+  POSTGRES_PASSWORD: compose
+
+tox_tests:
+  tags: [docker]
+  image: quay.io/redhat-aqe/tox:latest
+  services:
+    - postgres:latest
+  stage: testing
+  before_script:
+    # Trust the IT Root CA.
+    - curl https://password.corp.redhat.com/RH-IT-Root-CA.crt > /etc/pki/ca-trust/source/anchors/RH-IT-Root-CA.crt
+    - update-ca-trust
+  script:
+    # official way to provide password to psql: http://www.postgresql.org/docs/9.3/static/libpq-envars.html
+    - export PGPASSWORD=$POSTGRES_PASSWORD
+    - sudo dnf install -y postgresql postgresql-server
+    - psql -U $POSTGRES_USER -h postgres -d $POSTGRES_DB -w -c 'CREATE TABLE if not exists products (id integer PRIMARY KEY,label VARCHAR(100) NOT NULL, version VARCHAR(100) NOT NULL,variant VARCHAR(200), allow_source_only boolean DEFAULT false)'
+    - psql -U $POSTGRES_USER -h postgres -d $POSTGRES_DB -w -c 'CREATE TABLE if not exists overrides (name VARCHAR NOT NULL,pkg_arch VARCHAR(32) NOT NULL, product_arch VARCHAR(32) NOT NULL,product integer NOT NULL, include boolean DEFAULT true)'
+    - psql -U $POSTGRES_USER -h postgres -d $POSTGRES_DB -w -c 'CREATE TABLE if not exists tree_product_map (tree_id INTEGER NOT NULL, product_id INTEGER NOT NULL)'
+    - psql -U $POSTGRES_USER -h postgres -d $POSTGRES_DB -w -c 'CREATE sequence if not exists products_id_seq start 1'
+    - pip install -r requirements.txt
+    - tox
+  only:
+    - merge_requests

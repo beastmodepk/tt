@@ -1,0 +1,19 @@
+---
+product_name: xmlstarlet
+version: 4.5
+variant: Cluster
+allow_source_only: False
+packages:
+  console-login-helper-messages:
+    arch:
+    #This cannot be null, either it needs to have at least one item or it should be removed completely
+    noarch:
+    - ppc64le
+    - s390x
+  xmlstarlet:
+    arch:
+    - aarch64
+    - ppc64le
+    - s390x
+    - x86_64
+    - src

@@ -1,0 +1,31 @@
+---
+product_name: xmlstarlet
+version: 4.5
+variant: Cluster
+allow_source_only: false
+packages:
+  console-login-helper-messages:
+    arch:
+    - ia64
+    - aarch64
+    - s390x
+    src:
+    - ia64
+    - aarch64
+    - s390x
+    noarch:
+    - ppc64le
+    - s390x
+    multilib:
+    - s390x: ppc64le
+  xmlstarlet:
+    arch:
+    - s390x
+    - aarch64
+    - ppc64le
+    - x86_64
+    src:
+    - s390x
+    - aarch64
+    - ppc64le
+    - x86_64
